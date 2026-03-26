@@ -1,0 +1,22 @@
+# Environments
+venv/
+env/
+.env
+
+# Python byte-compilation
+__pycache__/
+*.py[cod]
+*$py.class
+
+# IDEs
+.idea/
+.vscode/
+
+# Logs and runtime files
+*.log
+*.sqlite3
+postgres_data/
+
+# OS generated files
+.DS_Store
+Thumbs.db
