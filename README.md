@@ -1,6 +1,32 @@
 # 🚀 Project Nebula — Distributed Task Orchestrator
 
-![Nebula Architecture](https://via.placeholder.com/1200x400.png?text=Event-Driven+Distributed+Task+Orchestrator)
+```mermaid
+graph TD
+    classDef client fill:#f9f,stroke:#333,stroke-width:2px;
+    classDef master fill:#bbf,stroke:#333,stroke-width:2px;
+    classDef queue fill:#fca,stroke:#333,stroke-width:2px;
+    classDef worker fill:#dfd,stroke:#333,stroke-width:2px;
+    classDef db fill:#eee,stroke:#333,stroke-width:2px;
+
+    Client([Client API Request]):::client -->|POST /tasks| Master(FastAPI Master Node):::master
+
+    subgraph "Control Plane"
+        Master -->|1. Publish| Queue[(Redis / Kafka)]:::queue
+        Master -.->|Telemetry| DB[(PostgreSQL)]:::db
+        Scheduler((Heuristic Scheduler)):::master -->|2. Pull Task| Queue
+        Optimizer((LP Optimizer Daemon)):::master -.->|60s Compaction| DB
+    end
+
+    subgraph "Worker Fleet"
+        Scheduler -->|3. Assign| W1[Worker Node 1]:::worker
+        Scheduler -->|3. Assign| W2[Worker Node 2]:::worker
+        Scheduler -->|3. Assign| W3[Worker Node N]:::worker
+    end
+
+    W1 -->|4. Heartbeat & Completion| DB
+    W2 -->|4. Heartbeat & Completion| DB
+    W3 -->|4. Heartbeat & Completion| DB
+```
 
 **Project Nebula** is a **high-performance, event-driven distributed task orchestration system** designed to handle **10,000+ concurrent workloads** with sub-200ms scheduling latency.
 
