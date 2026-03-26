@@ -2,11 +2,11 @@
 
 ```mermaid
 graph TD
-    classDef client fill:#f9f,stroke:#333,stroke-width:2px;
-    classDef master fill:#bbf,stroke:#333,stroke-width:2px;
-    classDef queue fill:#fca,stroke:#333,stroke-width:2px;
-    classDef worker fill:#dfd,stroke:#333,stroke-width:2px;
-    classDef db fill:#eee,stroke:#333,stroke-width:2px;
+    classDef client fill:#e3f2fd,stroke:#1565c0,stroke-width:2px,color:#000000;
+    classDef master fill:#f3e5f5,stroke:#6a1b9a,stroke-width:2px,color:#000000;
+    classDef queue fill:#fff3e0,stroke:#e65100,stroke-width:2px,color:#000000;
+    classDef worker fill:#e8f5e9,stroke:#2e7d32,stroke-width:2px,color:#000000;
+    classDef db fill:#fafafa,stroke:#424242,stroke-width:2px,color:#000000;
 
     Client([Client API Request]):::client -->|POST /tasks| Master(FastAPI Master Node):::master
 
